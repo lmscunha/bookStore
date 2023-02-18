@@ -12,5 +12,5 @@ app.use(routes);
 
 const port = 3000;
 app.listen(port, () => {
-  console.log("Bookstore Open");
+  console.log("Bookstore Open!");
 });
