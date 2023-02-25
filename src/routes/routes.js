@@ -13,4 +13,10 @@ routes.post("/book", (req, res) => {
   });
 });
 
+routes.get("/book", (req, res) => {
+  res.json({
+    book_list: tempDB,
+  });
+});
+
 module.exports = routes;
