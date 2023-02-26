@@ -2,7 +2,7 @@ const { v4: uuidv4 } = require("uuid");
 const { Router } = require("express");
 
 const routes = Router();
-const tempDB = [];
+let tempDB = [];
 
 routes.get("/book", (req, res) => {
   res.json({
@@ -34,17 +34,20 @@ routes.post("/book", (req, res) => {
 routes.put("/book/:id", (req, res) => {
   const { title, author, publicationYear } = req.body;
   const bookId = req.params.id;
-  const book = tempDB.filter((book) => book.id === bookId);
-  const newBook = {
-    id: uuidv4(),
-    title,
-    author,
-    publicationYear,
-  };
-  // TODO: ADD REPLACE FUNCTION to update book
-  tempDB.push(newBook);
 
-  res.json(newBook);
+  let bookUpdated = "";
+
+  tempDB.forEach((book) => {
+    if (book.id === bookId) {
+      book.title = title;
+      book.author = author;
+      book.publicationYear = publicationYear;
+
+      bookUpdated = book;
+    }
+  });
+
+  res.json(bookUpdated);
 });
 
 module.exports = routes;
