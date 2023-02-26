@@ -50,4 +50,21 @@ routes.put("/book/:id", (req, res) => {
   res.json(bookUpdated);
 });
 
+routes.delete("/book/:id", (req, res) => {
+  const bookId = req.params.id;
+
+  let bookIndex = 0;
+  tempDB.forEach((book) => {
+    if (book.id === bookId) {
+      bookIndex = tempDB.indexOf(book);
+    }
+  });
+
+  tempDB = tempDB.slice(bookIndex, 1);
+  console.log("DELETED INDEX", bookIndex);
+  console.log("current list state", tempDB);
+
+  return res.status(204).json({ message: "book deleted" });
+});
+
 module.exports = routes;
