@@ -60,9 +60,7 @@ routes.delete("/book/:id", (req, res) => {
     }
   });
 
-  tempDB = tempDB.slice(bookIndex, 1);
-  console.log("DELETED INDEX", bookIndex);
-  console.log("current list state", tempDB);
+  tempDB.splice(bookIndex, 1);
 
   return res.status(204).json({ message: "book deleted" });
 });
