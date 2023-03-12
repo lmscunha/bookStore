@@ -4,6 +4,13 @@ const routes = require("./routes/routes");
 const app = express();
 app.use(express.json());
 
+const bookData = function (req, res, next) {
+  console.log('is my middleware')
+  next()
+}
+
+app.use(bookData)
+
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
