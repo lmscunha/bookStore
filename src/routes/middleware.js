@@ -4,6 +4,7 @@ const bookDataParsed = function (req, res, next) {
   const parsedTitle = title;
   const parsedAuthor = author;
   const parsedPY = +publicationYear;
+
   const validBookData =
     typeof parsedTitle === "string" &&
     typeof parsedAuthor === "string" &&
