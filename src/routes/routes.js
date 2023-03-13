@@ -1,5 +1,6 @@
 const { v4: uuidv4 } = require("uuid");
 const { Router } = require("express");
+const { bookDataParsed } = require("./middleware");
 
 const routes = Router();
 let tempDB = [];
@@ -17,7 +18,7 @@ routes.get("/book/:id", (req, res) => {
   res.json(book[0]);
 });
 
-routes.post("/book", (req, res) => {
+routes.post("/book", bookDataParsed, (req, res) => {
   const { title, author, publicationYear } = req.body;
   const newBook = {
     id: uuidv4(),
@@ -31,7 +32,7 @@ routes.post("/book", (req, res) => {
   res.json(newBook);
 });
 
-routes.put("/book/:id", (req, res) => {
+routes.put("/book/:id", bookDataParsed, (req, res) => {
   const { title, author, publicationYear } = req.body;
   const bookId = req.params.id;
 
