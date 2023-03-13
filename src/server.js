@@ -5,21 +5,24 @@ const app = express();
 app.use(express.json());
 
 const bookData = function (req, res, next) {
-  const {title, author, publicationYear} = req.body
+  const { title, author, publicationYear } = req.body;
 
-  const parsedTitle = title
-  const parsedAuthor = author
-  const parsedPY = +publicationYear
-  const validBookData = typeof parsedTitle  === 'string' && typeof parsedAuthor === 'string' && parsedPY > 0
+  const parsedTitle = title;
+  const parsedAuthor = author;
+  const parsedPY = +publicationYear;
+  const validBookData =
+    typeof parsedTitle === "string" &&
+    typeof parsedAuthor === "string" &&
+    parsedPY > 0;
 
-  if(!validBookData ) {
-    return res.status(403).json({message: 'Invalid book data'})
+  if (!validBookData) {
+    return res.status(403).json({ message: "Invalid book data" });
   }
 
-  next()
-}
+  next();
+};
 
-app.use(bookData)
+app.use(bookData);
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
